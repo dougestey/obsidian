@@ -18,10 +18,12 @@ client.on('message', async(msg) => {
   let command = msg.content.split(' ')[0];
   let commands = ['!auth', '!deauth', '!roles', '!sync'];
 
+  // Only proceed if a valid command has been issued.
   if (!commands.includes(command)) {
     return msg.reply('Valid commands: `!auth`, `!deauth`, `!roles`, `!sync`');
   }
 
+  // !auth and !deauth
   if (command.includes('auth')) {
     let segments = msg.content.split(`${command} `);
 
@@ -36,6 +38,10 @@ client.on('message', async(msg) => {
       return msg.reply('Did not understand that command. Try this: `' + command + ' Rocket X for Command,Members`');
     }
 
+    if (!Seat.users.length || !Seat.roles.length) {
+      return msg.reply('Not synced with Seat yet. Run `!sync` first.');
+    }
+
     msg.reply(`Okay, I will update ${character}'s ${roleString} roles.`);
 
     let result;
@@ -46,7 +52,7 @@ client.on('message', async(msg) => {
       console.error(e);
       msg.reply('Error issuing command.');
     }
-  } else {
+  } else { // Everything else.
     try {
       await Seat.process(command, null, null, msg);
     } catch (e) {
