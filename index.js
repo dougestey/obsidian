@@ -20,7 +20,7 @@ client.on('message', async(msg) => {
 
   // Only proceed if a valid command has been issued.
   if (!commands.includes(command)) {
-    return msg.reply('Valid commands: `!auth`, `!deauth`, `!roles`, `!sync`');
+    return msg.channel.send('Valid commands: `!auth`, `!deauth`, `!roles`, `!sync`');
   }
 
   // !auth and !deauth
@@ -28,35 +28,33 @@ client.on('message', async(msg) => {
     let segments = msg.content.split(`${command} `);
 
     if (segments.length === 1) {
-      return msg.reply('Did not understand that command. Try this: `' + command + ' Rocket X for Command,Members`');
+      return msg.channel.send('Did not understand that command. Try this: `' + command + ' Rocket X for Command,Members`');
     }
 
     let [ character, roleString ] = segments[1].split(' for ');
     let roles = roleString.split(',');
 
     if (!character || !roles.length) {
-      return msg.reply('Did not understand that command. Try this: `' + command + ' Rocket X for Command,Members`');
+      return msg.channel.send('Did not understand that command. Try this: `' + command + ' Rocket X for Command,Members`');
     }
 
     if (!Seat.users.length || !Seat.roles.length) {
-      return msg.reply('Not synced with Seat yet. Run `!sync` first.');
+      return msg.channel.send('Not synced with Seat yet. Run `!sync` first.');
     }
 
-    msg.reply(`Okay, I will update ${character}'s ${roleString} roles.`);
-
-    let result;
+    msg.channel.send(`Okay, I will update ${character}'s ${roleString} roles.`);
 
     try {
-      result = await Seat.process(command, character, roles, msg);
+      await Seat.process(command, character, roles, msg);
     } catch (e) {
       console.error(e);
-      msg.reply('Error issuing command.');
+      msg.channel.send('Error issuing command.');
     }
   } else { // Everything else.
     try {
       await Seat.process(command, null, null, msg);
     } catch (e) {
-      msg.reply('Error running that command.');
+      msg.channel.send('Error running that command.');
 
       return console.error(e);
     }

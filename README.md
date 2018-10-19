@@ -8,5 +8,5 @@ To use:
 - Clone this repo
 - `npm install`
 - `cp .env.example .env`
-- Fill in `DISCORD_BOT_TOKEN` and `SEAT_API_TOKEN`
+- Fill in all .env fields
 - `node index.js`
