@@ -1,7 +1,7 @@
 {
-  "name": "authbot",
+  "name": "obsidian",
   "version": "1.0.0",
-  "description": "Discord auth command relay.",
+  "description": "A Discord interface for managing roles in SeAT",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/dougestey/authbot.git"
+    "url": "git+ssh://git@github.com/dougestey/obsidian.git"
   },
   "author": "Doug Estey",
-  "license": "UNLICENSED",
   "bugs": {
-    "url": "https://gitlab.com/dougestey/authbot/issues"
+    "url": "https://github.com/dougestey/obsidian/issues"
   },
-  "homepage": "https://gitlab.com/dougestey/authbot#README",
+  "license": "MIT",
+  "homepage": "https://github.com/dougestey/obsidian",
   "dependencies": {
     "axios": "^0.18.0",
     "discord.js": "^11.4.2",
