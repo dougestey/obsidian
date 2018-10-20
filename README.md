@@ -1,4 +1,4 @@
-# authbot
+# obsidian
 Simple Discord bot that can add/remove SeAT roles to/from users.
 
 To use:
